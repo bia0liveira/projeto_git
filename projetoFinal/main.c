@@ -60,6 +60,29 @@ void buscarProduto() {
     printf("Produto nao encontrado.\n");
 }
 
+void removerProduto() {
+    int id, i, encontrado = 0;
+    printf("Digite o ID do produto para remover: ");
+    scanf("%d", &id);
+
+    for (i = 0; i < contador; i++) {
+        if (produtos[i].id == id) {
+            encontrado = 1;
+            break;
+        }
+    }
+
+    if (encontrado) {
+        for (int j = i; j < contador - 1; j++) {
+            produtos[j] = produtos[j + 1];
+        }
+        contador--;
+        printf("Produto removido com sucesso!\n");
+    } else {
+        printf("Produto nao encontrado.\n");
+    }
+}
+
 int main() {
     int opcao;
     do {
@@ -67,7 +90,8 @@ int main() {
         printf("1. Adicionar Produto\n");
         printf("2. Listar Produtos\n");
         printf("3. Buscar Produto por ID\n");
-        printf("4. ");
+        printf("4. Remover Produto\n");
+        printf("5. Sair\n");
         printf("Escolha uma opcao: ");
         scanf("%d", &opcao);
         getchar();
@@ -83,11 +107,15 @@ int main() {
                 buscarProduto();
                 break;
             case 4:
+                removerProduto();
+                break;
+            case 5:
+                printf("Saindo...\n");
                 break;
             default:
                 printf("Opcao invalida. Tente novamente.\n");
         }
-    } while (opcao != 4);
+    } while (opcao != 5);
 
     return 0;
 }
